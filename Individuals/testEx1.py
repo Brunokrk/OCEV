@@ -25,9 +25,9 @@ def create_pop(indType, popSize, dim):
             
     return population
 
-
-individual_type = input("FODASE:")
-pop = create_pop(individual_type, POPULATION_SIZE, DIMENSION)
-
-for idx, individual in enumerate(pop):
-    print(f"Individual {idx+1}: {individual}")
+if __name__ == "__main__":
+    with open("input.txt", "r") as file:
+        individual_type =  file.readline().strip()
+    pop = create_pop(individual_type, POPULATION_SIZE, DIMENSION)
+    for idx, individual in enumerate(pop):
+        print(f"Individual {idx+1}: {individual}")
