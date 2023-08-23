@@ -1,4 +1,4 @@
-from Individual import *
+from individual import *
 import numpy as np
 
 class IntIndividual(Individual):

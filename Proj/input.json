@@ -1,0 +1,8 @@
+{
+    "individualType": "INT-PERM",
+    "dimension": 8,
+    "population_size": 10,
+    "problem": "n-queens"
+}
+
+
