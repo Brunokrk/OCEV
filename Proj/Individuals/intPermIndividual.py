@@ -1,4 +1,4 @@
-from individual import *
+from Individuals.individual import *
 import numpy as np
 
 class IntPermIndividual(Individual):

@@ -1,8 +1,8 @@
-from binaryIndividual import *
-from fitness import *
-from intIndividual import *
-from realIndividual import *
-from intPermIndividual import *
+from Individuals.binaryIndividual import BinaryIndividual
+from Fncs.fitness import *
+from Individuals.intIndividual import *
+from Individuals.realIndividual import *
+from Individuals.intPermIndividual import *
 import json
 
 
