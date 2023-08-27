@@ -2,13 +2,13 @@
 name = "ocev"
 version = "0.1.0"
 description = ""
-authors = ["Bruno Marchi Pires <45456467+Brunokrk@users.noreply.github.com>"]
+authors = ["Brunokrk <piresbr@outlook.com>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-streamlit = "^1.25.0"
+python = "^3.10"
+streamlit = "^1.26.0"
 taskipy = "^1.12.0"
 numpy = "^1.25.2"
 polars = "^0.18.15"
