@@ -1,6 +1,6 @@
 {
     "individualType": "INT-PERM",
-    "dimension": 8,
+    "dimension": 64,
     "population_size": 10,
     "problem": "n-queens"
 }

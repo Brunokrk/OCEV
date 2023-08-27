@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ocev"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Marchi Pires <45456467+Brunokrk@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.25.0"
+taskipy = "^1.12.0"
+numpy = "^1.25.2"
+polars = "^0.18.15"
+plotly = "^5.16.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
