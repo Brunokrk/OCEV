@@ -7,7 +7,8 @@ TITLE = "OCEV - Computação Evolutiva - Trabalho 2023/2"
 if __name__ == "__main__":
     #Header
     st.set_page_config(TITLE, layout="wide")
-    st.header(TITLE, divider='rainbow')
+    st.header(TITLE)
+    st.divider()
     #Select Problem
     problemsList=["Nenhum","N-Queens",]
     selectedProblem = st.selectbox("Selecione o Problema para Atacar:", problemsList)
@@ -24,12 +25,12 @@ if __name__ == "__main__":
         createdPopulation = attackButton(individualType, populationSize, dimension, selectedProblem)
         col1, col2 = st.columns(2)
         with col1:
-            st.header("População", divider = True)
+            st.header("População")
             for idx, individual in enumerate(createdPopulation):
                 st.write(f"Individual {idx+1}: {individual}")
                 
         with col2:
-            st.header("Score", divider = True)
+            st.header("Score")
             for idx, individual in enumerate(createdPopulation):
                 st.write(f"Individual {idx+1}: {individual.score}")
         
