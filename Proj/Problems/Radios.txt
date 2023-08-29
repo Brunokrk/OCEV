@@ -1,0 +1,15 @@
+Considere uma fábrica de rádios que possui duas linhas de
+produção
+    – Rádios Standard
+    – Rádios Luxo
+• Informações dos rádios Standard
+    – Linha de produção comporta um máximo de 24 funcionários
+    – Cada rádio consome 1 homem/dia para ser produzido
+    – Cada rádio fornece R$30,00 de lucro
+• Informações dos rádios Luxo
+    – Linha de produção comporta um máximo de 32 funcionários
+    – Cada rádio consome 2 homem/dia para ser produzido
+    – Cada rádio fornece R$40,00 de lucro
+• A fábrica possui um total de 40 funcionários a serem alocados
+nas duas linhas de produção
+• Objetivo: Maximizar o lucro diário.
