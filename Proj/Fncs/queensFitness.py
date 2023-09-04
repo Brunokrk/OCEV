@@ -10,5 +10,3 @@ def queensProblem (cromossome):
     maxClashes = ((tabLenght -1)* tabLenght)/2
     return (maxClashes - clashes)
     
-
-

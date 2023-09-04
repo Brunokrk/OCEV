@@ -98,3 +98,4 @@ class EvolutiveAlgorithm():
         for idx, individual in enumerate(selected):
             print(f"Individual {idx+1}: {individual}")
         return selected
+    

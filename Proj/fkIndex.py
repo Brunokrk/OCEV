@@ -22,11 +22,11 @@ def setProblemDescription(p):
 if __name__ == "__main__":
     #Header
     st.set_page_config(TITLE, layout="wide")
-    st.header(TITLE, divider="rainbow")
+    st.header(TITLE)
     
     configCol, descCol = st.columns(2)
     with configCol:
-        st.header("Configuração do Problema", divider =True)
+        st.header("Configuração do Problema")
         #Select Problem
         problemsList=["Fábrica de Rádios","N-Queens",]
         SELECTED_PROBLEM = st.selectbox("Selecione o Problema para Atacar:", problemsList)
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         #Executa
         executeAttack = st.button("ATTACK!", use_container_width=True)
     with descCol:
-        st.header("Descrição do Problema", divider =True)
+        st.header("Descrição do Problema")
         st.text(setProblemDescription(SELECTED_PROBLEM))
 
     if executeAttack:
@@ -49,13 +49,13 @@ if __name__ == "__main__":
         algorithm.torneio(2)
         col1, col2 = st.columns(2)
         with col1:
-            st.header("População", divider=True)
+            st.header("População")
             for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual}")
                 
         with col2:
-            st.header("Score", divider=True)
+            st.header("Score")
             for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual.score}")
-   
+        
 
