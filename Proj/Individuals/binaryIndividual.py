@@ -11,4 +11,3 @@ class BinaryIndividual(Individual):
     def init_cromossome(self, size):
         return np.random.RandomState().randint(2, size=size)
     
-    #Demais features por individuo

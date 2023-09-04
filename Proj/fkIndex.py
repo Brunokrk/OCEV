@@ -1,11 +1,14 @@
+from evoAlg import EvolutiveAlgorithm
 import streamlit as st
-from auxFunctions import *
 
 TITLE = "OCEV - Computação Evolutiva - Trabalho 2023/2"
 SELECTED_PROBLEM = ""
 INDIVIDUAL_TYPE = ""
 DIMENSION = 0
 POPULATION_SIZE = 0
+
+# Se quisermos mostrar melhores indivíduos de cada geração
+# Estrutura de dados deve ser estar aqui
 
 def setProblemDescription(p):
     if p == "N-Queens":
@@ -41,16 +44,18 @@ if __name__ == "__main__":
         st.text(setProblemDescription(SELECTED_PROBLEM))
 
     if executeAttack:
-        createdPopulation = attackButton(INDIVIDUAL_TYPE, POPULATION_SIZE, DIMENSION, SELECTED_PROBLEM)
+        algorithm = EvolutiveAlgorithm(SELECTED_PROBLEM, POPULATION_SIZE, DIMENSION, INDIVIDUAL_TYPE)
+        algorithm.apply_problem()
+        algorithm.torneio(2)
         col1, col2 = st.columns(2)
         with col1:
             st.header("População", divider=True)
-            for idx, individual in enumerate(createdPopulation):
+            for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual}")
                 
         with col2:
             st.header("Score", divider=True)
-            for idx, individual in enumerate(createdPopulation):
+            for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual.score}")
    
 

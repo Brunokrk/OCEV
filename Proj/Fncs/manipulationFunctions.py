@@ -9,3 +9,4 @@ def decodifyBinCromossome (cromossome, initial, final):
 def scaleAdjustment(int_n, qtd_bits, min_bound, max_bound):
     '''A ideia aqui é receber um numero inteiro, e ajustar sua escala'''
     return min_bound + ((max_bound - min_bound)/(2**qtd_bits-1))* int_n
+
