@@ -6,6 +6,12 @@ SELECTED_PROBLEM = ""
 INDIVIDUAL_TYPE = ""
 DIMENSION = 0
 POPULATION_SIZE = 0
+SELECTION_TYPE = ""
+CROSSOOVER_TYPE = ""
+QTD_GENERATIONS = 0
+CROSSOVER = 0.90
+MUTATION = 0.05
+ELITISMO = True
 
 # Se quisermos mostrar melhores indivíduos de cada geração
 # Estrutura de dados deve ser estar aqui
@@ -33,10 +39,23 @@ if __name__ == "__main__":
         #Select Individual Type
         individualsTypeList=["Inteiro", "Inteiro Permutado", "Binário", "Real"]
         INDIVIDUAL_TYPE = st.selectbox("Selecione a Codificação (Tipo) dos Indivíduos:", individualsTypeList)
+        #Tipo de Seleção
+        selectionList=["Torneio","Roleta",]
+        SELECTION_TYPE = st.selectbox("Selecione o Tipo de Seleção", selectionList)
+        #Tipo Crossover
+        crossoverList=["1 Ponto","2 Pontos","Unif","PMX"]
+        CROSSOVER_TYPE = st.selectbox("Selecione o Tipo de Crossover", crossoverList)
+        #Mutation 
+        mutationList=["SWAP","BIT-FLIP"]
+        MUTATION_TYPE = st.selectbox("Selecione o Tipo de Crossover", mutationList)
+        #Elitista
+        ELITISMO = st.checkbox("Elitismo?", value=True)
         #Select Individual DIMENSION
         DIMENSION = st.slider("Selecione a Dimensão dos Indivíduos:")
         #Select Population Size
         POPULATION_SIZE = st.slider("Selecione o Tamanho da População Inicial:")
+        #Select Gerações
+        QTD_GENERATIONS = st.slider("Selecione a Quantidade de Gerações")
         #Executa
         executeAttack = st.button("ATTACK!", use_container_width=True)
     with descCol:
@@ -44,9 +63,9 @@ if __name__ == "__main__":
         st.text(setProblemDescription(SELECTED_PROBLEM))
 
     if executeAttack:
-        algorithm = EvolutiveAlgorithm(SELECTED_PROBLEM, POPULATION_SIZE, DIMENSION, INDIVIDUAL_TYPE)
+        algorithm = EvolutiveAlgorithm(SELECTED_PROBLEM, POPULATION_SIZE, DIMENSION, INDIVIDUAL_TYPE, QTD_GENERATIONS, SELECTION_TYPE, CROSSOVER_TYPE,MUTATION_TYPE, CROSSOVER, MUTATION, ELITISMO)
         algorithm.apply_problem()
-        algorithm.torneio(2)
+        algorithm.evolutive_loop()
         col1, col2 = st.columns(2)
         with col1:
             st.header("População")
@@ -54,7 +73,7 @@ if __name__ == "__main__":
                 st.write(f"Individual {idx+1}: {individual}")
                 
         with col2:
-            st.header("Score")
+            st.header("Score Última População")
             for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual.score}")
         

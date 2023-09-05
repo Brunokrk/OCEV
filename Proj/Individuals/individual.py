@@ -11,4 +11,4 @@ class Individual(ABC):
         pass
 
     def __str__(self):
-        return np.array2string(self.cromossome)
+        return str(self.cromossome)
