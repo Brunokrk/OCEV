@@ -1,5 +1,8 @@
 from evoAlg import EvolutiveAlgorithm
 import streamlit as st
+import plotly.express as px
+import plotly.graph_objs as go
+from streamlit_plotly_events import plotly_events
 
 TITLE = "OCEV - Computação Evolutiva - Trabalho 2023/2"
 SELECTED_PROBLEM = ""
@@ -24,6 +27,26 @@ def setProblemDescription(p):
         with open('Problems/Radios.txt', 'r') as pDesc:
             return  pDesc.read() 
     return ""
+
+def plottingGraphs(averageFitness):
+    trace = go.Scatter(x=list(range(len(averageFitness))),  # Índices
+                    y=averageFitness,  # Valores
+                    mode='markers+lines',  # Define o estilo do gráfico
+                    marker=dict(size=10))  # Define o tamanho dos marcadores
+
+    data = [trace]  # Coloca o trace em uma lista de dados
+
+    # Layout do gráfico
+    layout = go.Layout(title='Gráfico de Convergência',
+                   xaxis=dict(title='Geração'),
+                   yaxis=dict(title='Fitness Médio'))
+
+    # Cria a figura
+    fig = go.Figure(data=data, layout=layout)
+
+    # Exibe o gráfico
+    selected_points = plotly_events(fig)
+
 
 if __name__ == "__main__":
     #Header
@@ -65,7 +88,7 @@ if __name__ == "__main__":
     if executeAttack:
         algorithm = EvolutiveAlgorithm(SELECTED_PROBLEM, POPULATION_SIZE, DIMENSION, INDIVIDUAL_TYPE, QTD_GENERATIONS, SELECTION_TYPE, CROSSOVER_TYPE,MUTATION_TYPE, CROSSOVER, MUTATION, ELITISMO)
         algorithm.apply_problem()
-        algorithm.evolutive_loop()
+        averageFitness , bestIndividuals,  bestIndividualsFit = algorithm.evolutive_loop()
         col1, col2 = st.columns(2)
         with col1:
             st.header("População")
@@ -76,5 +99,9 @@ if __name__ == "__main__":
             st.header("Score Última População")
             for idx, individual in enumerate(algorithm.population):
                 st.write(f"Individual {idx+1}: {individual.score}")
+
+        st.divider()
+        st.header("Plotando Gráficos")
+        plottingGraphs(bestIndividualsFit)
         
 

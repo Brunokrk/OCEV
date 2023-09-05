@@ -26,6 +26,7 @@ class EvolutiveAlgorithm():
     def evolutive_loop(self):
         bestIndividuals = [] #Por Geração
         averageFitness = [] #Por Geração
+        bestIndividualsFitness = []
         generation = 0
 
         worstIndAux, bestIndAux = self.calculaFitness()
@@ -34,6 +35,7 @@ class EvolutiveAlgorithm():
         generalBest = copy.deepcopy(self.population[bestIndAux])
 
         bestIndividuals = [self.population[bestIndAux].cromossome]
+        bestIndividualsFitness += [self.population[bestIndAux].score]
         averageFitness = [self.averagePopulationFitness()]
 
         while generation < self.qtdGenerations:
@@ -67,8 +69,10 @@ class EvolutiveAlgorithm():
                     bestIndAux = worstIndAux
             
             bestIndividuals += [self.population[bestIndAux].cromossome]
+            bestIndividualsFitness += [self.population[bestIndAux].score]
             averageFitness  += [self.averagePopulationFitness()]
         
+        return averageFitness, bestIndividuals, bestIndividualsFitness
         #print("\n\nMelhor Solução Encontrada: " + generalBest.cromossome+ " -> "+ generalBest.score)
 
 
