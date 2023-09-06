@@ -38,9 +38,9 @@ class EvolutiveAlgorithm():
         bestIndividualsFitness += [self.population[bestIndAux].score]
         averageFitness = [self.averagePopulationFitness()]
 
-        while generation < self.qtdGenerations:
+        while generalBest.score < 8128  : #generalBest.score = =8128 or generation < self.qtdGenerations 
             generation += 1
-            print(self.population)
+            #print(self.population)
             selection = self.selectionChoice()
             
             #cross
@@ -64,6 +64,7 @@ class EvolutiveAlgorithm():
             #Verifica se tem novo melhor geral
             if self.population[bestIndAux].score > generalBest.score:
                 generalBest = copy.deepcopy(self.population[bestIndAux])
+                print(generalBest.score)
             else:
                 if self.isElitist == True:
                     bestIndAux = worstIndAux
@@ -72,6 +73,7 @@ class EvolutiveAlgorithm():
             bestIndividualsFitness += [self.population[bestIndAux].score]
             averageFitness  += [self.averagePopulationFitness()]
         
+        print(generation)
         return averageFitness, bestIndividuals, bestIndividualsFitness
         #print("\n\nMelhor Solução Encontrada: " + generalBest.cromossome+ " -> "+ generalBest.score)
 
