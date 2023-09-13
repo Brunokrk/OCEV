@@ -92,7 +92,7 @@ if __name__ == "__main__":
         #Elitista
         ELITISMO = st.checkbox("Elitismo?", value=True)
         #Select Individual DIMENSION
-        DIMENSION = st.slider("Selecione a Dimensão dos Indivíduos:")
+        DIMENSION = st.slider("Selecione a Dimensão dos Indivíduos:", max_value=128)
         #Select Population Size
         POPULATION_SIZE = st.slider("Selecione o Tamanho da População Inicial:")
         #Select Gerações
