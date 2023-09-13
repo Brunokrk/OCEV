@@ -8,13 +8,13 @@ import numpy as np
 import copy
 
 class EvolutiveAlgorithm():
+    """Guarda informações sobre uma execução do algoritmo"""
     def __init__(self, problem, population_size, dimension, ind, generations, selectionType, crossoverType, mutationType, crossoverChance, mutationChance, elitismo):
         self.problem = problem
         self.populationSize = population_size
         self.dimension = dimension
         self.individualType = ind
         self.population = self.create_pop()
-        self.mutationType = None
         self.selectionType = selectionType
         self.crossoverType = crossoverType
         self.mutationType = mutationType
@@ -22,6 +22,9 @@ class EvolutiveAlgorithm():
         self.mutationChance = mutationChance
         self.qtdGenerations = generations
         self.isElitist = elitismo
+
+        #Atributos de cunho estatístico
+        self.generalBest = None #Guardará sempre o melhor indivíduo a cada Loop Evolutivo
 
     def evolutive_loop(self):
         bestIndividuals = [] #Por Geração
@@ -32,7 +35,7 @@ class EvolutiveAlgorithm():
         worstIndAux, bestIndAux = self.calculaFitness()
 
         #best Indivíduo até então
-        generalBest = copy.deepcopy(self.population[bestIndAux])
+        self.generalBest = copy.deepcopy(self.population[bestIndAux])
 
         bestIndividuals = [self.population[bestIndAux].cromossome]
         bestIndividualsFitness += [self.population[bestIndAux].score]
@@ -40,7 +43,7 @@ class EvolutiveAlgorithm():
 
         while generation < self.qtdGenerations:
             generation += 1
-            print(self.population)
+            #print(self.population)
             selection = self.selectionChoice()
             
             #cross
@@ -59,11 +62,11 @@ class EvolutiveAlgorithm():
 
             #elitismo
             if self.isElitist == True:
-                self.population[worstIndAux] = copy.deepcopy(generalBest)
+                self.population[worstIndAux] = copy.deepcopy(self.generalBest)
             
             #Verifica se tem novo melhor geral
-            if self.population[bestIndAux].score > generalBest.score:
-                generalBest = copy.deepcopy(self.population[bestIndAux])
+            if self.population[bestIndAux].score > self.generalBest.score:
+                self.generalBest = copy.deepcopy(self.population[bestIndAux])
             else:
                 if self.isElitist == True:
                     bestIndAux = worstIndAux
@@ -177,8 +180,8 @@ class EvolutiveAlgorithm():
             secondRandInd = np.random.choice(list(range(len(self.population))), p=secondChances)
             selected += [self.population[secondRandInd]]
         
-        for idx, individual in enumerate(selected):
-            print(f"Individual {idx+1}: {individual}")
+        #for idx, individual in enumerate(selected):
+        #    print(f"Individual {idx+1}: {individual}")
         return selected
     
     def torneio(self, tamTorneio):
@@ -200,4 +203,3 @@ class EvolutiveAlgorithm():
         #for idx, individual in enumerate(selected):
         #    print(f"Individual {idx+1}: {individual}")
         return selected
-    

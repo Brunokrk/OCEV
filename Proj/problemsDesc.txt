@@ -1,9 +1,0 @@
-
-####### Problema das N-Rainhas #######
-Problema das N-rainhas, onde N representa a quantidade de rainhas a 
-serem dispostas em um tabuleiro NxN. Considere tabuleiros de 8x8, 16x16, 
-32x32, 64x64, 128x128. Defina os cromossomos de cada indivíduo da população
-e gere a população inicial. Considere inicialmente 10 indivíduos. 
-Modele a função fitness e faça a avaliação da população inicial. 
-Armazene melhor e pior indivíduos.
-#######################################
