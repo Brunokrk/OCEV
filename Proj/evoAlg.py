@@ -41,7 +41,7 @@ class EvolutiveAlgorithm():
         bestIndividualsFitness += [self.population[bestIndAux].score]
         averageFitness = [self.averagePopulationFitness()]
 
-        while generalBest.score < 8128  : #generalBest.score = =8128 or generation < self.qtdGenerations 
+        while generation < self.qtdGenerations: #generalBest.score = =8128 or generation < self.qtdGenerations 
             generation += 1
             #print(self.population)
             selection = self.selectionChoice()
@@ -74,12 +74,11 @@ class EvolutiveAlgorithm():
             bestIndividuals += [self.population[bestIndAux].cromossome]
             bestIndividualsFitness += [self.population[bestIndAux].score]
             averageFitness  += [self.averagePopulationFitness()]
+            print(str(self.generalBest.score)+" : "+str(generation))
         
         print(generation)
         return averageFitness, bestIndividuals, bestIndividualsFitness
         #print("\n\nMelhor Solução Encontrada: " + generalBest.cromossome+ " -> "+ generalBest.score)
-
-
 
     def create_pop(self):
         """Cria população INT, BIN, REAL, INT-PERM de acordo com o problema"""

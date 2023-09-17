@@ -40,7 +40,20 @@ def plottingGraphs(averageFitness):
     # Exibe o gráfico
     return fig
 
+def boxplot(title):
+    fig = go.Figure()
+    boxplot_data = []  # Lista para armazenar os dados para o boxplot
+    for i, algorithm in enumerate(ALG_EXECS_HIST):
+        best_fitness = [ind.score for ind in algorithm.population]
+        boxplot_data.append(best_fitness)
+        fig.add_trace(go.Box(y=best_fitness, name=f'Execução {i+1}'))
 
+    fig.update_layout(
+        title=title,
+        xaxis=dict(title='Execuções'),
+        yaxis=dict(title='Fitness')
+    )
+    return fig
 
 if __name__ == "__main__":
     #Header
@@ -74,7 +87,7 @@ if __name__ == "__main__":
         #Select Population Size
         POPULATION_SIZE = st.slider("Selecione o Tamanho da População Inicial:")
         #Select Gerações
-        QTD_GENERATIONS = st.slider("Selecione a Quantidade de Gerações")
+        QTD_GENERATIONS = st.slider("Selecione a Quantidade de Gerações",max_value=1500)
         #Executa
     elif SELECTED_PROBLEM == "Fábrica de Rádios":
         #Select Individual Type
@@ -96,7 +109,7 @@ if __name__ == "__main__":
         #Select Population Size
         POPULATION_SIZE = st.slider("Selecione o Tamanho da População Inicial:")
         #Select Gerações
-        QTD_GENERATIONS = st.slider("Selecione a Quantidade de Gerações")
+        QTD_GENERATIONS = st.slider("Selecione a Quantidade de Gerações",max_value=1500)
         #Executa
 
     executeAttack = st.button("ATTACK!", use_container_width=True)
@@ -112,27 +125,28 @@ if __name__ == "__main__":
         
             with tabs[i]:
                 col1, col2 = st.columns(2)
-                with col1:
-                    st.header("População")
-                    for idx, individual in enumerate(algorithm.population):
-                        st.write(f"Individual {idx+1}: {individual}")                    
-                with col2:
-                    st.header("Score Última População")
-                    for idx, individual in enumerate(algorithm.population):
-                        st.write(f"Individual {idx+1}: {individual.score}")
-                st.divider()
-                st.header("Plotando Gráficos")
-                plotly_events(plottingGraphs(bestIndividualsFit))
+                with st.expander("Gráfico Convergência"):
+                    with col1:
+                        with st.expander("População Última Geração"):
+                            st.header("População")
+                            for idx, individual in enumerate(algorithm.population):
+                                st.write(f"Individual {idx+1}: {individual}")                    
+                    with col2:
+                        with st.expander("Score Ultima Geração"):
+                            st.header("Score Última População")
+                            for idx, individual in enumerate(algorithm.population):
+                                st.write(f"Individual {idx+1}: {individual.score}")
+                    st.header("Plotando Gráficos")
+                    plotly_events(plottingGraphs(bestIndividualsFit))
 
         with st.expander("Estatísticas Gerais"):
             #Média e desvio padrão do valor da função objetivo do melhor indivíduo de cada execução
-            st.header("Melhores indivíduos de cada execução")
-            for i in ALG_EXECS_HIST:
-                st.write(str(i.generalBest.cromossome))
-                st.write(i.generalBest.score)
+            #st.header("Melhores indivíduos de cada execução")
+            plotly_events(boxplot("boxplot"))
             #Valores das variáveis da melhor solução encontrada dentre todas as execuções
             
             #Valor da Func Objetivo da melhor solução
+            
 
 
 
