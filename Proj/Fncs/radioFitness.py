@@ -19,4 +19,4 @@ def radioProblem(cromossome):
     h = max(0,(standard +2*luxo -40)/16)
     fo = (30*standard + 40*luxo)/1360 - h
     
-    return fo
+    return fo, standard, luxo

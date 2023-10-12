@@ -103,6 +103,9 @@ class EvolutiveAlgorithm():
         if self.problem == "N-Queens":
             for ind in(self.population):
                 ind.queensFitness()
+        elif self.problem == "N-Queens with ScoreBoard":
+            for ind in (self.population):
+                ind.queensFitnessPenality()
         elif self.problem == "Fábrica de Rádios":
             for ind in (self.population):
                 ind.radioFitness()

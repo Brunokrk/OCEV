@@ -9,13 +9,16 @@ class BinaryIndividual(Individual):
         self.max_bound = maxB
         self.score = 0
         self.cod = "BIN"
+        self.standard = 0
+        self.luxo = 0
+        #self.fo = 0
         self.cromossome = self.init_cromossome(size)
 
     def init_cromossome(self, size):
         return np.random.RandomState().randint(2, size=size)
     
     def radioFitness(self):   
-        self.score = radioProblem(self.cromossome)
+        self.score, self.standard, self.luxo = radioProblem(self.cromossome)
 
     def crossover(self, secondParent, type):
         if type == "1 Ponto":

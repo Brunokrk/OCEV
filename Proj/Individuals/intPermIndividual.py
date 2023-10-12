@@ -1,20 +1,26 @@
 from Individuals.individual import *
 import numpy as np
 
-from Fncs.queensFitness import queensProblem
+from Fncs.queensFitness import queensProblem, queensProblemPenalties
 
 class IntPermIndividual(Individual):
     def __init__(self, size):
             self.cod = "INT-PERM"
             self.score = 0
+            self.fo = 0
             self.cromossome = self.init_cromossome(size)
 
     def init_cromossome(self, size):
         return np.random.RandomState().permutation(size)
     
     def queensFitness(self):
-        self.score = queensProblem(self.cromossome)
+        self.score, self.fo = queensProblem(self.cromossome)
     
+    def queensFitnessPenality(self):
+        #print("oi")
+        self.score ,self.fo = queensProblemPenalties(self.cromossome)
+        #print(self.score)
+
     def crossover(self, secondParent, type):
         #tipo de crossover
         if type == "PMX":
