@@ -74,9 +74,9 @@ class EvolutiveAlgorithm():
             bestIndividuals += [self.population[bestIndAux].cromossome]
             bestIndividualsFitness += [self.population[bestIndAux].score]
             averageFitness  += [self.averagePopulationFitness()]
-            print(str(self.generalBest.score)+" : "+str(generation))
+            #print(str(self.generalBest.score)+" : "+str(generation))
         
-        print(generation)
+        #print(generation)
         return averageFitness, bestIndividuals, bestIndividualsFitness
         #print("\n\nMelhor Solução Encontrada: " + generalBest.cromossome+ " -> "+ generalBest.score)
 
@@ -86,9 +86,10 @@ class EvolutiveAlgorithm():
         if self.individualType == "Real":
             for _ in range(self.populationSize):
                 population.append(RealIndividual(self.dimension, -10, 10))
-        elif self.individualType == "Inteiro":
+        elif self.individualType == "Inteiro" and self.problem== "Labirinto":
+            
             for _ in range(self.populationSize):
-                population.append(IntIndividual(self.dimension, -5, 10))
+                population.append(IntIndividual(self.dimension, 0, 10))
         elif self.individualType == "Inteiro Permutado":
             for _ in range(self.populationSize):
                 population.append(IntPermIndividual(self.dimension))
@@ -106,6 +107,9 @@ class EvolutiveAlgorithm():
         elif self.problem == "N-Queens with ScoreBoard":
             for ind in (self.population):
                 ind.queensFitnessPenality()
+        elif self.problem == "Labirinto":
+            for ind in (self.population):
+                ind.labirintoFitness()
         elif self.problem == "Fábrica de Rádios":
             for ind in (self.population):
                 ind.radioFitness()
